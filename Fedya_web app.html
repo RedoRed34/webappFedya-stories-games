@@ -1,0 +1,165 @@
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Главная меню</title>
+    <link href="https://fonts.googleapis.com/css?family=Rubik:400,700&display=swap" rel="stylesheet">
+    <style>
+        body, .banner, .header, .header a, .container, .category, .category-content, .category-title, .category-description, .lorem-ipsum, .button, .footer, .footer p {
+            font-family: 'Rubik', Arial, sans-serif !important;
+        }
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #fff; /* Белый фон */
+        }
+
+        .banner {
+            width: 100%;
+            max-height: 600px;
+            overflow: hidden;
+        }
+
+        .banner img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .header {
+            background-color: #007bff;
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+            display: flex;
+            justify-content: space-around;
+        }
+
+        .header a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.2em;
+        }
+
+        .container {
+            max-width: 960px;
+            margin: 20px auto;
+            padding: 20px;
+        }
+
+        .category {
+            display: flex;
+            align-items: center;
+            margin-bottom: 40px;
+        }
+
+        .category-image {
+            width: 200px;
+            margin-left: 20px; /* Changed from margin-right to margin-left */
+        }
+
+        .category-content {
+            flex: 1;
+            text-align: left; /* Ensures the text is left-aligned */
+        }
+
+        .category-title {
+            font-size: 2em;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .category-description {
+            margin-bottom: 20px;
+        }
+
+        .lorem-ipsum {
+            text-align: center; /* Center-align the Lorem Ipsum text */
+        }
+
+        .button {
+            display: inline-block;
+            padding: 25px 80px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: bold;
+        }
+
+        .footer {
+            background-color: #007bff;
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        .qr-code {
+            width: 100px;
+            margin: 0 auto;
+        }
+
+        /* Дополнительные стили для лучшей адаптации */
+        @media (max-width: 600px) {
+            .category {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .category-image {
+                margin-left: 0;
+                margin-bottom: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <a href="#">Меню</a>
+        <a href="path/stories/stories.html">Истории</a>
+        <a href="path\games\menu_game\forgamemenu.html">Игры</a>
+        <a href="path\contacts\contacts_info.html">Авторы</a>
+    </div>
+
+    <div class="banner">
+        <img src="img/banner_Fedya_main_beta.jpg.png" alt="Баннер">  <!-- ЗАМЕНИТЕ banner.jpg! -->
+    </div>
+
+    <div class="container">
+
+        <!-- First Category (Now with image on the right) -->
+        <div class="category">
+            <div class="category-content">
+                <h2 class="category-title">Истории</h2>
+                <p class="category-description">Записи историй о маленьком медвежонке Феде. В разделе «История» загружены 3 ознакомительных рассказа, другие вы всегда сможете найти в группе музея.</p>
+                <a href="path/stories/stories.html" class="button" style="margin-right: 220px; margin-bottom: 50px;">ПЕРЕЙТИ</a>
+            </div>
+            <img src="img/png-svs.png" alt="Изображение категории 1" class="category-image">
+        </div>
+
+        <!-- Second Category (Image on the right, same as before) -->
+        <div class="category">
+            <div class="category-content">
+                <h2 class="category-title">Игры</h2>
+                <p class="category-description" style="margin-right: 220px;"> В разделе «Игры» вы сможете поиграть с Федей в морской бой, а также помочь ему разобраться с сигнальными флагами.</p>
+                <a href="path\games\menu_game\forgamemenu.html" class="button"style="margin-bottom:50px">ПЕРЕЙТИ</a>
+            </div>
+            <img src="img\png-pawn.png" alt="Изображение категории 2" class="category-image">
+        </div>
+
+        <!-- Lorem Ipsum Text (Now Center-Aligned) -->
+        <p class="lorem-ipsum">Знакомьтесь, это друг и талисман Военно-морского музея Северного флота – Медвежонок Федя. Вместе вы сможете читать, играть и узнавать новое о 
+            нашем крае и не только.  
+            </p>
+
+    </div>
+
+    <div class="footer">
+        <img src="img/qr-code.svg" alt="QR-код" class="qr-code" style="margin-top: 10px;width: 80px;";>
+
+        <p>Написать Феде</p>
+    </div>
+
+</body>
+</html>

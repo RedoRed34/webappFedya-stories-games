@@ -1,0 +1,211 @@
+<html lang="ru">
+<head>
+    <link href="https://fonts.googleapis.com/css?family=Rubik:400,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Rubik+Mono+One&display=swap" rel="stylesheet">
+    <style>
+      body, .back-button-fixed, .back-button, .container, .block, .block-text, .block-image, .block-image img, .footer, .footer p, .button {
+        font-family: 'Rubik', Arial, sans-serif !important;
+      }
+      .banner {
+        font-family: 'Rubik Mono One', Arial, sans-serif !important;
+      }
+      .back-button-fixed {
+        position: fixed;
+        top: 18px;
+        left: 18px;
+        z-index: 2000;
+        padding: 10px 18px;
+        background: #fff;
+        color: #007bff;
+        border: 2px solid #007bff;
+        border-radius: 6px;
+        text-decoration: none;
+        font-weight: 500;
+        font-size: 1em;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        /* no animation, always white */
+      }
+    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Веб-приложение про Федю</title>
+    <style>
+        body {
+            font-family: Rubik, Regular;
+            /* font-family: Arial, sans-serif; */
+            margin: 0;
+            padding: 0;
+            padding-bottom: 120px;
+
+            background-color: #f4f4f4;
+        }
+
+.back-button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #4CAF50; /* Зеленый цвет */
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            margin: 20px;
+            font-size: 16px;
+        }
+
+        .back-button:hover {
+            background-color: #367c39; /* Более темный зеленый при наведении */
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Баннер */
+        .banner {
+            background-color: #007bff;
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+            font-size: 2em;
+        }
+
+        /* Блоки с информацией */
+        .block {
+            display: flex;
+            align-items: center;
+            margin: 20px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .block:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+
+        .block-text {
+            flex: 1;
+            padding: 20px;
+        }
+
+        .block-image {
+            flex: 1;
+            text-align: center;
+        }
+
+        .block-image img {
+            width: 200px;
+            height: 200px;
+            border-radius: 8px;
+            object-fit: cover; /* Обрезаем, чтобы картинка была квадратной */
+        }
+
+        /* Отступ между блоками */
+        .spacer {
+            height: 30px;
+        }
+
+        /* Подвал */
+        .footer {
+            background-color: #007bff;
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .footer img {
+            width: 100px;
+            height: 100px;
+        }
+
+        .footer p {
+            margin-top: 10px;
+        }
+
+        /* Кнопка */
+        .button {
+            display: inline-block;
+            padding: 22px 32px;
+            background-color: #007bff; /* Синий цвет */
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+            font-size: 1.25em;
+        }
+
+        .button:hover {
+            background-color: #0056b3; /* Более темный синий при наведении */
+        }
+
+        /* Добавим адаптивность для маленьких экранов */
+        @media (max-width: 768px) {
+            .block {
+                flex-direction: column;
+            }
+
+            .block:nth-child(even) {
+                flex-direction: column;
+            }
+
+            .block-image img {
+                width: 150px;
+                height: 150px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <a href="../../../Fedya_web app.html" class="back-button-fixed">&larr; Назад</a>
+    <div class="banner" style="
+    font-size: 5em;
+    padding-top:70px;
+    padding-bottom: 80px;"> 
+    ИГРЫ С ФЕДЕЙ </div>
+    
+
+    <div class="block">
+        <div class="block-text">
+            <h2>Морские флаги</h2>
+            <p>Феде нужна ваша помощь, чтобы направить полёт авиации. Вы встанете напротив с мишкой, который будет показывать вам движения. Помните, что влево и вправо показаны зеркально.</p>
+            <a href="flags_game\index.html" class="button">Играть</a>
+        </div>
+        <div class="block-image">
+            <img src="Федя_флаги_micro.jpg" alt="Федя 1">
+        </div>
+    </div>
+
+    <div class="block">
+        <div class="block-image">
+            <img src="Федя_Морской бой_micro.jpg" alt="Федя 2">
+        </div>
+        <div class="block-text">
+            <h2>Морской бой</h2>
+            <p>Федя учится играть в морские сражения. Вы поможете ему разобраться в морской тактике?</p>
+            <a href="battleship\index.html" class="button">Играть</a>
+        </div>
+    </div>
+
+     <!-- <div class="block"> 
+        <div class="block-text">
+            <h2>Интересные факты о Феде</h2>
+            <p>Знали ли вы, что Федя умеет говорить на пяти языках? А еще он обожает играть в шахматы и коллекционирует старинные монеты!</p>
+            <a href="file:///E:/12/иллюстрации%20для%20ВК/game/game/alpha_v2/index.html" class="button">Играть в игру</a>
+        </div>
+        <div class="block-image">
+            <img src="" alt="Федя 3">
+        </div>
+    </div> -->
+
+    <div class="spacer"></div>
+
+    <div class="footer">
+        <img src="qr-code.svg" alt="QR код">
+        <p>Следите за Федей</p>
+    </div>
+
+</body>
+</html>

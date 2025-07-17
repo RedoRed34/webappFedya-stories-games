@@ -1,0 +1,150 @@
+/* Серый блок под квадратами */
+.stories-footer {
+    text-align: center;
+    color: #888;
+    font-size: 1.1em;
+    margin-top: 10px;
+    margin-bottom: 30px;
+    font-family: 'Rubik', Arial, sans-serif;
+}
+body {
+    font-family: 'Rubik', Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f0f0; /* Светло-серый фон для примера */
+}
+
+header {
+    background-color: #007bff; /* Тёмный фон для баннера */
+    color: white;
+    text-align: center;
+    padding: 50px;
+}
+
+.banner {
+    padding: 20px;
+}
+
+.white-space {
+    height: 50px; /* Высота отступа */
+    background-color: white;
+}
+
+.image-grid {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 32px;
+    padding: 32px 0;
+    background: #fff;
+    flex-wrap: wrap;
+}
+
+.grid-item {
+    min-width: 280px;
+    min-height: 280px;
+    background: #fff;
+    border: 1px solid #ccc;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s, box-shadow 0.2s;
+    cursor: pointer;
+    box-sizing: border-box;
+    text-align: center;
+    margin-bottom: 16px;
+    padding: 10px;
+}
+
+.grid-item:hover {
+    transform: scale(1.05);
+}
+
+.grid-item img {
+    max-width: 90%;
+    max-height: 320px;
+    object-fit: contain;
+    border-radius: 14px;
+    margin-bottom: 12px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Стили для модального окна */
+.modal {
+    display: none; /* Скрыто по умолчанию */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Полупрозрачный тёмный фон */
+    z-index: 1000; /* Отображать поверх всего */
+    overflow: auto; /* Добавляет прокрутку, если контент выходит за рамки */
+}
+
+.modal-content {
+    position: relative;
+    background-color: white;
+    margin: 10% auto; /* Центрирование */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 1200px;
+    display: flex;
+}
+
+.modal-left {
+    width: 50%;
+    padding: 10px;
+    border-right: 1px solid #ccc;
+}
+
+.modal-text-container {
+    height: 400px; /* Фиксированная высота для примера */
+    overflow: auto; /* Включает прокрутку, если текста много */
+    padding: 10px;
+    text-align: justify; /*выравнивание по ширине*/
+    word-break: break-word; /*Разрешить перенос */
+    overflow-wrap: break-word; /* Альтернативный перенос, если первый не работает*/
+    hyphens: auto; /* добавить дефисы*/
+    font-size: 20px;   /*размер шрифта, мб, потом изменю
+    line-height: 5px; /* Интервал между строками*/
+}
+
+.modal-right {
+    width: 50%;
+    padding: 10px;
+    text-align: center;
+}
+
+.modal-right img {
+    max-width: 80%;
+    height: auto;
+}
+
+.close-button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 10px;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+
+.text-container {
+  font-family: 'Rubik', Arial, sans-serif;
+  font-size: 1em;
+  color: #333;
+  padding: 16px;
+  border-radius: 8px;
+  line-height: 1.6;
+  text-align: justify;
+  max-height: 400px;
+  overflow-y: auto;
+}

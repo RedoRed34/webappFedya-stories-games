@@ -1,0 +1,113 @@
+/* style.css */
+body {
+  font-family: Rubik, Regular;
+  text-align: center;
+}
+
+.boards {
+  display: flex;
+  justify-content: space-around;
+}
+
+.board-container {
+  margin: 20px;
+}
+
+table {
+  border-collapse: collapse;
+  margin: 0 auto;
+}
+
+td {
+    width: 50px; /* Уменьшаем ширину */
+    height: 50px; /* Уменьшаем высоту */
+    border: 1px solid #ccc;
+    text-align: center;
+    cursor: pointer;
+}
+
+
+.ship {
+  background-color: #333;
+}
+
+.hit {
+  background-color: red;
+}
+
+.miss {
+  background-color: #eee;
+}
+
+button {
+  padding: 10px 20px;
+  font-family: Rubik, Regular;
+  font-size: 50px;
+  background-color: #49d5cf;
+  color: white;
+  border: none;
+  cursor: pointer;
+  margin-top: 20px;
+  border-radius: 10px;
+}
+
+button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+
+}
+
+#message {
+    margin-top: 12px;
+    font-family: Rubik, Regular;
+    /*font-weight: bold;*/
+    font-size: 25px;
+}
+
+.highlight {
+    background-color: #ffc107; /* Цвет подсветки */
+}
+
+
+#rotateButton {
+    
+    padding: 10px 20px;
+    font-size: 35px;
+    background-color: #007bff; /* Синий цвет */
+    color: white;
+    border: none;
+    cursor: pointer;
+    margin-top: 20px;
+    border-radius: 10px;
+}
+
+#rotateButton:hover {
+    background-color: #0056b3; /* Более темный синий при наведении */
+}
+
+.back-container {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    z-index: 1000;
+}
+
+.back-button {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 1em;
+    font-family: "Rubik Mono One", sans-serif;
+    color: white;
+    background-color: #007bff;
+    border: none;
+    border-radius: 6px;
+    text-decoration: none;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.back-button:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
+}
+

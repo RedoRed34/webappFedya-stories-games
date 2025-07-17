@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Игра с Федей</title>
+    <link rel="stylesheet" href="style1.css">
+    <link href="https://fonts.googleapis.com/css?family=Rubik:400,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Rubik+Mono+One&display=swap" rel="stylesheet">
+    <style>
+      .back-button {
+        position: fixed;
+        top: 18px;
+        left: 18px;
+        z-index: 2000;
+        padding: 10px 18px;
+        background: #fff;
+        color: #007bff;
+        border: 2px solid #007bff;
+        border-radius: 6px;
+        text-decoration: none;
+        font-weight: 500;
+        font-size: 1em;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        transition: background 0.2s, color 0.2s;
+      }
+      .back-button:hover {
+        background: #007bff;
+        color: #fff;
+      }
+    </style>
+</head>
+<body>
+    <a href="../forgamemenu.html" class="back-button">Вернуться назад</a>
+
+    <div class="container">
+        <div id="bear-container">
+            <img id="bear-image" src="fedya_idle.png" alt="Федя">
+        </div>
+        <div id="target-area">
+            <!-- Здесь будет отображаться "ПРОМАХ" или ничего -->
+            <span id="target-message"></span>
+        </div>
+        <p>Счет: <span id="score">0</span></p>
+        <p>Время: <span id="timer">30</span></p>
+        <div id="button-container">
+            <button class="arrow-button" data-direction="left">←</button>
+            <button class="arrow-button" data-direction="up">↑</button>
+            <button class="arrow-button" data-direction="right">→</button>
+        </div>
+        <div id="end-game" style="display:none;">
+            <h1>Игра окончена!</h1>
+            <p>Ваш счет: <span id="final-score"></span></p>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
