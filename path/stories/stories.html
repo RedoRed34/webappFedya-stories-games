@@ -14,6 +14,39 @@
       .back-button {
         font-family: 'Rubik', Arial, sans-serif !important;
       }
+      /* Адаптация заголовка для мобильных устройств */
+      .banner h1 {
+        font-size: 5em;
+        margin-bottom: 22px;
+        text-align: center;
+        letter-spacing: 0.01em;
+        white-space: normal;
+        max-width: 100vw;
+        box-sizing: border-box;
+      }
+      .banner {
+        overflow-x: hidden;
+      }
+      @media (max-width: 600px) {
+        .banner h1 {
+          font-size: 1.2em;
+          margin-bottom: 8px;
+          line-height: 1.1;
+          padding: 0 2px;
+          white-space: normal;
+          letter-spacing: 0;
+          text-align: center;
+          max-width: 100vw;
+          box-sizing: border-box;
+        }
+        .banner p {
+          font-size: 1em;
+        }
+        .banner {
+          padding: 10px 5px;
+          overflow-x: hidden;
+        }
+      }
     </style>
 </head>
 <body>
@@ -24,7 +57,7 @@
     <header>
         <div class="banner">
             <!-- Здесь ваш баннер (картинка или текст) -->
-            <h1 style="font-family: Rubik Mono One; font-size: 5em; margin-bottom: 22px;">Истории</h1>
+            <h1 style="font-family: Rubik Mono One; margin-bottom: 22px;">Истории</h1> <!--font-size: 5em-->
             <p>Здесь Вы можете ознакомиться с несколькими историями о талисмане музея. Другие рассказы вы всегда сможете найти в группе музея.</p>
         </div>
     </header>
