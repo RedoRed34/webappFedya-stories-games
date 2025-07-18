@@ -28,6 +28,32 @@
         overflow-x: hidden;
       }
       @media (max-width: 600px) {
+        .modal-content {
+          flex-direction: column-reverse;
+          align-items: center;
+        }
+        .modal-left {
+          width: 100%;
+          min-width: 0;
+          flex: 2 1 70%;
+        }
+        .modal-right {
+          width: 100%;
+          min-width: 0;
+          flex: 1 1 30%;
+          display: flex;
+          justify-content: center;
+          align-items: flex-start;
+        }
+        .modal-right img {
+          max-width: 80px;
+          max-height: 80px;
+          margin-top: 12px;
+          margin-bottom: 0;
+          display: block;
+          margin-left: auto;
+          margin-right: auto;
+        }
         .banner h1 {
           font-size: 1.2em;
           margin-bottom: 8px;
@@ -55,8 +81,9 @@
     <a href="../../Fedya_web app.html" class="back-button" style="position:fixed;top:18px;left:18px;z-index:2000;padding:10px 18px;background:#fff;color:#007bff;border:2px solid #007bff;border-radius:6px;text-decoration:none;font-weight:500;font-size:1em;box-shadow:0 2px 8px rgba(0,0,0,0.08);">← Вернуться назад</a>
 
     <header>
-        <div class="banner" style="padding-top: 20px;">>
-            <!-- Здесь ваш баннер -->
+        <div class="banner" style="
+    padding-top: 20px;">
+            <!-- Здесь ваш баннер (картинка или текст) -->
             <h1 style="font-family: Rubik Mono One; margin-bottom: 22px;">Истории</h1> <!--font-size: 5em-->
             <p>Здесь Вы можете ознакомиться с несколькими историями о талисмане музея. Другие рассказы вы всегда сможете найти в группе музея.</p>
         </div>
@@ -82,6 +109,7 @@
 
 
 
+            <!-- Добавьте больше квадратов -->
 
         </div>
 
