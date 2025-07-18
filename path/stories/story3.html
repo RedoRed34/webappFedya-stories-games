@@ -38,6 +38,12 @@
       line-height: 1.7;
       font-family: 'Rubik', Arial, sans-serif;
     }
+    .mobile-title {
+      display: none;
+    }
+    .desktop-title {
+      display: block;
+    }
     @media (max-width: 800px) {
       .modal-text-container {
         padding: 18px 6vw;
@@ -52,6 +58,15 @@
       .story-text-block b {
         font-size: 1em !important;
         font-weight: 400 !important;
+      }
+      .mobile-title {
+        display: block;
+        font-size: 1.1em;
+        font-weight: 700;
+        margin-bottom: 12px;
+      }
+      .desktop-title {
+        display: none;
       }
     }
     .back-button {
@@ -77,7 +92,8 @@
   <div class="modal-text-container">
     <img src="img/03_08_2024.jpg" alt="Изображение истории" style="display:block;max-width:700px;width:100%;height:auto;margin:0 auto 32px auto;border-radius:14px;">
     <div class="story-text-block">
-      <p><strong>А нужно Зачем на кораблях бьют склянки, и почему скорость измеряют в узлах?</strong></p>
+      <span class="mobile-title"><strong>А нужно Зачем на кораблях бьют склянки, и почему скорость измеряют в узлах?</strong></span>
+      <span class="desktop-title"><strong>А нужно Зачем на кораблях бьют склянки, и почему скорость измеряют в узлах?</strong></span>
       <p>Федя сидел на берегу и наблюдал, как с шумом накатывают волны и отступают назад. Они перекатывали камешки, маленькие и побольше, по дну, создавая ещё больше шума. Медвежонку нравилась такая погода. Прохладно, и вкусно пахнет морем. Кая кружила над водой низко-низко, вылавливая из воды мелких рыбёшек, которых поднимали волны.</p>
       <p>Вдруг прямо к мишкиным лапам море вынесло стеклянную банку. Ладно бы, бутылку с посланием. А тут — простую стеклянную банку. Федя поднял её, понюхал, покрутил в лапах: вверх — вниз, вниз — вверх. Потом надел банку на лапу и улыбнулся — явно что-то придумал!</p>
       &nbsp;—
