@@ -26,6 +26,7 @@
   width: 100%;
   max-width: 800px;
   height: auto;
+  display: block;
 }
 
 #target-area {
@@ -124,25 +125,25 @@
   transform: scale(1.05);
 }
 
-/* Медиа-запросы для планшетов */
+/* Медиа-запросы для планшетов (landscape и portrait) */
 @media (max-width: 768px) {
   .container {
     padding: 8px;
   }
 
   #bear-image {
-    max-width: 600px;
+    max-width: 100%;
   }
 
   #target-area {
     font-size: 1.2em;
     padding: 12px;
     min-height: 70px;
-    max-width: 600px;
+    max-width: 100%;
   }
 
   .score-timer-container {
-    max-width: 600px;
+    max-width: 100%;
   }
 
   #score, #timer {
@@ -150,7 +151,7 @@
   }
 
   #button-container {
-    max-width: 600px;
+    max-width: 100%;
     gap: 8px;
   }
 
@@ -166,8 +167,62 @@
   }
 }
 
-/* Медиа-запросы для телефонов (большие) */
-@media (max-width: 600px) {
+/* Для телефонов в горизонтальной ориентации (landscape) */
+@media (max-width: 768px) and (orientation: landscape) {
+  .container {
+    padding: 5px;
+    min-height: auto;
+  }
+
+  #bear-container {
+    margin: 5px;
+    max-height: 50vh;
+    overflow: hidden;
+  }
+
+  #bear-image {
+    max-height: 50vh;
+    width: auto;
+  }
+
+  #target-area {
+    font-size: 0.95em;
+    padding: 8px;
+    min-height: 50px;
+    margin: 5px auto;
+  }
+
+  .score-timer-container {
+    margin: 5px 0;
+    gap: 5px;
+  }
+
+  #score, #timer {
+    font-size: 0.85em;
+    margin: 0;
+  }
+
+  #button-container {
+    gap: 5px;
+    margin-top: 10px;
+  }
+
+  .arrow-button {
+    width: 60px;
+    height: 60px;
+    font-size: 1.5em;
+  }
+
+  .back-button {
+    padding: 6px 12px;
+    font-size: 0.8em;
+    top: 3px;
+    left: 3px;
+  }
+}
+
+/* Медиа-запросы для телефонов в вертикальной ориентации (portrait) */
+@media (max-width: 600px) and (orientation: portrait) {
   .container {
     padding: 5px;
   }
@@ -177,9 +232,9 @@
   }
 
   #target-area {
-    font-size: 1em;
-    padding: 10px;
-    min-height: 60px;
+    font-size: 1.1em;
+    padding: 12px;
+    min-height: 65px;
     max-width: 100%;
   }
 
@@ -188,30 +243,30 @@
   }
 
   #score, #timer {
-    font-size: 0.95em;
+    font-size: 1em;
   }
 
   #button-container {
     max-width: 100%;
-    gap: 6px;
+    gap: 8px;
   }
 
   .arrow-button {
-    width: 70px;
-    height: 70px;
-    font-size: 1.6em;
+    width: 90px;
+    height: 90px;
+    font-size: 1.8em;
   }
 
   .back-button {
-    padding: 6px 12px;
-    font-size: 0.8em;
+    padding: 8px 14px;
+    font-size: 0.85em;
     top: 5px;
     left: 5px;
   }
 }
 
-/* Медиа-запросы для маленьких телефонов */
-@media (max-width: 420px) {
+/* Медиа-запросы для маленьких телефонов в вертикальной ориентации */
+@media (max-width: 420px) and (orientation: portrait) {
   .container {
     padding: 3px;
   }
@@ -221,9 +276,9 @@
   }
 
   #target-area {
-    font-size: 0.9em;
-    padding: 8px;
-    min-height: 50px;
+    font-size: 1em;
+    padding: 10px;
+    min-height: 55px;
     margin: 8px auto;
   }
 
@@ -233,23 +288,23 @@
   }
 
   #score, #timer {
-    font-size: 0.9em;
+    font-size: 0.95em;
   }
 
   #button-container {
-    gap: 5px;
+    gap: 6px;
     margin-top: 15px;
   }
 
   .arrow-button {
-    width: 60px;
-    height: 60px;
-    font-size: 1.4em;
+    width: 75px;
+    height: 75px;
+    font-size: 1.5em;
   }
 
   .back-button {
-    padding: 5px 10px;
-    font-size: 0.75em;
+    padding: 6px 11px;
+    font-size: 0.8em;
     top: 3px;
     left: 3px;
   }
