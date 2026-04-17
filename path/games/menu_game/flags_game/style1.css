@@ -175,13 +175,12 @@
   }
 
   #bear-container {
-    margin: 5px;
-    max-height: 50vh;
-    overflow: hidden;
+    margin: 3px;
+    max-height: 35vh;
   }
 
   #bear-image {
-    max-height: 50vh;
+    max-height: 35vh;
     width: auto;
   }
 
