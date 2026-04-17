@@ -1,110 +1,256 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 .container {
-    text-align: center;
-    font-family: sans-serif;
-    margin:0;
-    hight: 100vh;
-    justify-content: center;
-    display: flex;             /* Use flexbox to center the content */
-    flex-direction: column;  /* Stack the content vertically */
-    align-items: center;      /* Horizontally center the content */
+  text-align: center;
+  font-family: sans-serif;
+  min-height: 100vh;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px;
+  background-color: #f5f5f5;
 }
 
 #bear-container {
-    margin: 10px;
+  margin: 10px;
+  width: 100%;
+  max-width: 800px;
 }
 
 #bear-image {
-    width: 800px; /* Adjust as needed */
+  width: 100%;
+  max-width: 800px;
+  height: auto;
 }
 
 #target-area {
-    font-size: 2em;
-    margin: 5px;
-    background-color: #121336;
-    color: white;
-    padding: 10px;
-    min-height: 100px; /* Увеличьте минимальную высоту, чтобы прямоугольник был толще */
-    width: 100%; /* Ширина как процент от родительского контейнера */
-    max-width: 800px; /* Максимальная ширина в пикселях */
-    border-radius: 15px;  /* Округлые углы */
-    display: flex;       /* Для центрирования текста */
-    align-items: center;  /* Вертикальное центрирование */
-    justify-content: center; /* Горизонтальное центрирование */
+  font-size: 1.5em;
+  margin: 10px auto;
+  background-color: #121336;
+  color: white;
+  padding: 15px;
+  min-height: 80px;
+  width: 100%;
+  max-width: 800px;
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 
 #target-area span {
-    display: inline-block;
-    min-height: 8px; /* Чтобы span занимал место, даже если там ничего нет */
+  display: inline-block;
+  min-height: 8px;
 }
 
 .score-timer-container {
-    display: flex;            /* Размещаем элементы в строку */
-    align-items: center;     /* Выравниваем элементы по вертикали */
-    justify-content: center;  /* Выравниваем элементы по горизонтали */
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 15px 0;
+  width: 100%;
+  max-width: 800px;
 }
 
 #score, #timer {
-    font-size: 1.2em;
-    margin: 0%;          /* Уменьшаем отступы между элементами */
-}
-
-#score {
-    font-size: 1.2em;
-    margin-bottom: 2px; /* Уменьшаем отступ только снизу */
-}
-
-#timer {
-    font-size: 1.2em;
-    margin-top: 2px;    /* Уменьшаем отступ только сверху */
-    margin-bottom: 5px;
+  font-size: 1.1em;
+  margin: 0;
 }
 
 #button-container {
-    display: flex;
-    justify-content: center;
-    margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 20px;
+  flex-wrap: wrap;
+  width: 100%;
+  max-width: 800px;
 }
 
 .arrow-button {
-    background-color: #008cff87; /* A nice blue color */
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    margin: 0 10px;
-    font-size: 2.5em;
-    cursor: pointer;
-    border-radius: 15px; /* Rounded corners */
-    width: 120px; /* Increased width */
-    height: 120px; /* Increased height */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+  background-color: #008cff87;
+  color: white;
+  border: none;
+  padding: 0;
+  margin: 0;
+  font-size: 2em;
+  cursor: pointer;
+  border-radius: 15px;
+  width: 100px;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  flex-shrink: 0;
 }
 
 .arrow-button:hover {
-    background-color: #007bff; /* Darker blue on hover */
+  background-color: #007bff;
 }
 
 .arrow-button:active {
-    background-color: #007bff; /* Even darker blue when active */
+  background-color: #0056b3;
+  transform: scale(0.95);
 }
 
 .back-button {
-    display: inline-block;
-    padding: 10px 20px;
-    font-size: 1em;
-    font-family: "Rubik Mono One", sans-serif;
-    color: white;
-    background-color: #007bff;
-    border: none;
-    border-radius: 6px;
-    text-decoration: none;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-    transition: background-color 0.3s ease, transform 0.2s ease;
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 1em;
+  font-family: "Rubik Mono One", sans-serif;
+  color: white;
+  background-color: #007bff;
+  border: none;
+  border-radius: 6px;
+  text-decoration: none;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  z-index: 1000;
 }
 
 .back-button:hover {
-    background-color: #0056b3;
-    transform: scale(1.05);
+  background-color: #0056b3;
+  transform: scale(1.05);
+}
+
+/* Медиа-запросы для планшетов */
+@media (max-width: 768px) {
+  .container {
+    padding: 8px;
+  }
+
+  #bear-image {
+    max-width: 600px;
+  }
+
+  #target-area {
+    font-size: 1.2em;
+    padding: 12px;
+    min-height: 70px;
+    max-width: 600px;
+  }
+
+  .score-timer-container {
+    max-width: 600px;
+  }
+
+  #score, #timer {
+    font-size: 1em;
+  }
+
+  #button-container {
+    max-width: 600px;
+    gap: 8px;
+  }
+
+  .arrow-button {
+    width: 80px;
+    height: 80px;
+    font-size: 1.8em;
+  }
+
+  .back-button {
+    padding: 8px 16px;
+    font-size: 0.9em;
+  }
+}
+
+/* Медиа-запросы для телефонов (большие) */
+@media (max-width: 600px) {
+  .container {
+    padding: 5px;
+  }
+
+  #bear-image {
+    max-width: 100%;
+  }
+
+  #target-area {
+    font-size: 1em;
+    padding: 10px;
+    min-height: 60px;
+    max-width: 100%;
+  }
+
+  .score-timer-container {
+    max-width: 100%;
+  }
+
+  #score, #timer {
+    font-size: 0.95em;
+  }
+
+  #button-container {
+    max-width: 100%;
+    gap: 6px;
+  }
+
+  .arrow-button {
+    width: 70px;
+    height: 70px;
+    font-size: 1.6em;
+  }
+
+  .back-button {
+    padding: 6px 12px;
+    font-size: 0.8em;
+    top: 5px;
+    left: 5px;
+  }
+}
+
+/* Медиа-запросы для маленьких телефонов */
+@media (max-width: 420px) {
+  .container {
+    padding: 3px;
+  }
+
+  #bear-container {
+    margin: 5px;
+  }
+
+  #target-area {
+    font-size: 0.9em;
+    padding: 8px;
+    min-height: 50px;
+    margin: 8px auto;
+  }
+
+  .score-timer-container {
+    gap: 8px;
+    margin: 10px 0;
+  }
+
+  #score, #timer {
+    font-size: 0.9em;
+  }
+
+  #button-container {
+    gap: 5px;
+    margin-top: 15px;
+  }
+
+  .arrow-button {
+    width: 60px;
+    height: 60px;
+    font-size: 1.4em;
+  }
+
+  .back-button {
+    padding: 5px 10px;
+    font-size: 0.75em;
+    top: 3px;
+    left: 3px;
+  }
 }
