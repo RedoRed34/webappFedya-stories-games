@@ -1,0 +1,18 @@
+/* Improved responsive styles for landscape phone orientation */
+
+@media only screen and (orientation: landscape) {
+    .bear-image {
+        max-width: 50%; /* Reduced bear image size */
+        height: auto;
+    }
+    .layout {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        padding: 10px;
+    }
+    .content {
+        width: 70%; /* Optimized layout for horizontal viewing */
+        margin: auto;
+    }
+}
