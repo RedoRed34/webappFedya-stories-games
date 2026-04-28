@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Гонка знаний</title>
+  <link href="https://fonts.googleapis.com/css?family=Rubik:400,700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Rubik+Mono+One&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Rubik', Arial, sans-serif !important;
+      background: #f4f4f4;
+      margin: 0;
+      padding: 0;
+    }
+    .banner {
+      font-family: 'Rubik Mono One', Arial, sans-serif !important;
+      background-color: #007bff;
+      color: #fff;
+      text-align: center;
+      padding-top: 70px;
+      padding-bottom: 40px;
+      font-size: 2.5em;
+      letter-spacing: 0.01em;
+      margin-bottom: 0;
+    }
+    .back-button-fixed {
+      position: fixed;
+      top: 18px;
+      left: 18px;
+      z-index: 2000;
+      padding: 10px 18px;
+      background: #fff;
+      color: #007bff;
+      border: 2px solid #007bff;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 1em;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+    .menu-block {
+      max-width: 400px;
+      margin: 40px auto 0 auto;
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      padding: 32px 24px 24px 24px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .menu-title {
+      font-size: 1.5em;
+      font-weight: 700;
+      margin-bottom: 18px;
+      color: #007bff;
+      text-align: center;
+    }
+    .character-btn {
+      display: block;
+      width: 100%;
+      margin: 10px 0;
+      padding: 14px 0;
+      font-size: 1.15em;
+      font-weight: 500;
+      border-radius: 8px;
+      border: 2px solid #007bff;
+      background: #fff;
+      color: #007bff;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+    }
+    .character-btn:hover {
+      background: #007bff;
+      color: #fff;
+    }
+    .menu-actions {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      margin-top: 24px;
+    }
+    .menu-action-btn {
+  width: 100%;
+  margin: 0;
+  padding: 18px 48px;
+  font-size: 1.15em;
+  font-weight: 600;
+  border-radius: 10px;
+  border: 2px solid #4CAF50;
+  background: #fff;
+  color: #4CAF50;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+  word-break: break-word;
+  white-space: normal;
+    }
+    .menu-action-btn:hover {
+      background: #4CAF50;
+      color: #fff;
+    }
+    @media (max-width: 600px) {
+      .banner { font-size: 1.5em; padding-top: 40px; padding-bottom: 20px; }
+      .menu-block { max-width: 98vw; padding: 18px 8px; }
+      .menu-title { font-size: 1.1em; }
+      .character-btn { font-size: 1em; padding: 10px 0; }
+      .menu-actions { flex-direction: column; gap: 10px; }
+  .menu-action-btn { margin: 0; padding: 12px 8px; font-size: 1em; max-width: 100vw; }
+    }
+    /* ...existing code... (track, circle, etc.) */
+  .track { display: flex; flex-direction: row; align-items: center; margin: 20px 0; position: relative; }
+  .circle { width: 40px; height: 40px; border-radius: 50%; background: #eee; display: flex; align-items: center; justify-content: center; margin: 0 10px; position: relative; }
+    .player-above, .bot-below {
+      position: absolute;
+      left: 50%;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 2;
+      border: 2px solid #fff;
+      background: transparent;
+      padding: 0;
+    }
+  .fedya-circle { background: #4fc3f7; }
+  .kot-circle { background: #ff9800; }
+  .chayka-circle { background: #43a047; }
+    .circle { width: 40px; height: 40px; border-radius: 50%; background: #eee; display: flex; align-items: center; justify-content: center; margin: 0 10px; }
+    @media (max-width: 600px) {
+      .track { flex-direction: column; position: relative; height: 400px; width: 60px; margin: 30px auto; }
+      .line-vert { position: absolute; left: 50%; top: 0; transform: translateX(-50%); width: 6px; height: 100%; background: #bbb; z-index: 0; }
+      .circle { position: absolute; left: 50%; transform: translateX(-50%); margin: 0; width: 32px; height: 32px; font-size: 16px; }
+      .player-dot { left: 0; transform: none; background: #4caf50; color: #fff; }
+      .bot-dot { right: 0; left: auto; transform: none; background: #2196f3; color: #fff; }
+      .player-above, .bot-below { display: none !important; }
+    }
+  .active { background: #4caf50; color: #fff; }
+  .bot { background: #2196f3; color: #fff; }
+    .character { margin: 10px; cursor: pointer; }
+    .question { margin: 20px 0; }
+    .btn { margin: 5px; padding: 10px 20px; }
+    #game-area { 
+      margin-top: 50px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    #question-text, #options, #status {
+      text-align: center;
+      width: 100%;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    @media (max-width: 600px) {
+      .track { flex-direction: column; }
+      .circle { width: 32px; height: 32px; font-size: 16px; margin: 10px 0; }
+      .btn { padding: 8px 12px; font-size: 15px; }
+      #question-modal { display: flex !important; }
+      #question-text, #options { display: none !important; }
+    }
+    #question-modal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0,0,0,0.4);
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+    }
+    #modal-content {
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+      min-width: 220px;
+      max-width: 90vw;
+    }
+  </style>
+</head>
+<body>
+  <a href="../forgamemenu.html" class="back-button-fixed">&larr; Назад</a>
+  <div class="banner">Гонка знаний</div>
+  <div id="character-select" class="menu-block">
+    <div class="menu-title">Выберите команду</div>
+    <button class="character-btn" onclick="selectCharacter('Федя')">Команда Феди</button>
+    <button class="character-btn" onclick="selectCharacter('Kaя')">Команда Каи</button>
+    <button class="character-btn" onclick="selectCharacter('Кот')">Команда Яши</button>
+    
+    <div style="margin-top:24px; text-align:center;">
+      <button class="menu-action-btn" style="width:100%;margin:0 auto;display:block;" onclick="showTutorial()">Обучение</button>
+    </div>
+  </div>
+  <div id="tutorial-modal" style="display:none; position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(0,0,0,0.4); z-index:3000; align-items:center; justify-content:center;">
+  <div style="background:#fff; padding:32px 18px 18px 18px; border-radius:16px; max-width:900px; margin:auto; box-shadow:0 2px 10px rgba(0,0,0,0.15); text-align:center; display:flex; flex-direction:column; align-items:center;">
+    <div style="width:100%; display:flex; flex-direction:row; justify-content:space-between; align-items:flex-start; gap:0;">
+      <div style="flex:1; display:flex; flex-direction:column; align-items:center;">
+        <div style="width:220px; height:220px; background:#ffffff; border-radius:24px; margin-bottom:16px; display:flex; align-items:center; justify-content:center; box-shadow:none; border:none;">
+          <!-- Картинка Федя -->
+          <img src="img/fedya.png" alt="Федя" style="width:180px; height:180px; object-fit:cover; border-radius:18px; box-shadow:none; border:none;">
+        </div>
+        <div style="font-weight:700; color:#007bff; margin-bottom:10px; font-size:1.25em;">Федя</div>
+        <div style="font-size:1.08em; color:#444;"> Тот самый друг, который всегда чувствует, куда дует ветер перемен. Когда другие ещё раздумывают, Федя уже делает ход, будто знает ответ заранее. </div>
+      </div>
+      <div style="width:2px; background:#e0e0e0; height:220px; margin:0 18px;"></div>
+      <div style="flex:1; display:flex; flex-direction:column; align-items:center;">
+        <div style="width:220px; height:220px; background:#ffffff; border-radius:24px; margin-bottom:16px; display:flex; align-items:center; justify-content:center; box-shadow:none; border:none;">
+          <!-- Картинка Чайка -->
+          <img src="img/seagull.png" alt="Кая" style="width:180px; height:180px; object-fit:cover; border-radius:18px; box-shadow:none; border:none;">
+        </div>
+        <div style="font-weight:700; color:#007bff; margin-bottom:10px; font-size:1.25em;">Кая</div>
+        <div style="font-size:1.08em; color:#444;">Сам вихрь энергии! Иногда. Она летает над вопросами, как над волнами, не задерживаясь ни на секунду. Её стиль — это скорость, свобода и лёгкость. </div>
+      </div>
+      <div style="width:2px; background:#e0e0e0; height:220px; margin:0 18px;"></div>
+      <div style="flex:1; display:flex; flex-direction:column; align-items:center;">
+        <div style="width:220px; height:220px; background:#ffffff; border-radius:24px; margin-bottom:16px; display:flex; align-items:center; justify-content:center; box-shadow:none; border:none;">
+          <!-- Картинка Кот -->
+          <img src="img/kot.png" alt="Яша" style="width:180px; height:180px; object-fit:cover; border-radius:18px; box-shadow:none; border:none;">
+        </div>
+        <div style="font-weight:700; color:#007bff; margin-bottom:10px; font-size:1.25em;">Яша</div>
+        <div style="font-size:1.08em; color:#444;">Тот, кто играет не только умом, но и грацией. Он смышлен, изящен и немного хитёр, умеет появиться в нужный момент и поставить соперника в тупик одним движением хвоста. Ведь побеждает не только умный, но и умелый!</div>
+      </div>
+    </div>
+    <div style="margin-top:32px; font-size:1.15em; color:#222; max-width:90%; text-align:center;">
+      Выберите героя и отвечайте на вопросы. Каждый правильный ответ продвигает вас вперёд по дорожке.
+      Используйте суперспособность один раз за игру, чтобы получить преимущество.
+      Побеждает тот, кто первым дойдёт до финиша!
+    </div>
+    <button onclick="document.getElementById('tutorial-modal').style.display='none'" style="margin-top:24px; padding:12px 32px; background:#007bff; color:#fff; border:none; border-radius:8px; font-size:1.15em; cursor:pointer;">Понятно</button>
+  </div>
+</div>
+
+  <div id="game-area" style="display:none;">
+  <div class="track" id="track"></div>
+    <p id="question-text" style="margin-top: 50px;"></p>
+    <div id="options"></div>
+    <div id="question-modal">
+      <div id="modal-content">
+        <p id="modal-question"></p>
+        <div id="modal-options"></div>
+      </div>
+    </div>
+  <button class="btn" onclick="useSuperpower()" id="superBtn">Суперспособность</button>
+  <div id="ability-desc" style="margin:10px 0; font-size:15px; color:#555;"></div>
+    <div id="status"></div>
+  </div>
+
+     <div id="player-icon"></div>
+    <div id="bot-icon"></div>
+
+  <script>
+    function showTutorial() {
+      document.getElementById('tutorial-modal').style.display = 'flex';
+    }
+  </script>
+  <script src="script.js"></script>
+</body>
+</html>

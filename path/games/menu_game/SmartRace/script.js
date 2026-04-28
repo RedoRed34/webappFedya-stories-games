@@ -1,0 +1,367 @@
+const characters = [
+  { name: "Kaя", chance: 0.3 },
+  { name: "Кот", chance: 0.5 },
+  { name: "Федя", chance: 0.7 }
+];
+
+const style = document.createElement('style');
+style.type = 'text/css';
+
+
+style.innerHTML = `
+/* Стили для кнопок ответов */
+.btn {
+    padding: 15px 20px;
+    margin: 5px;
+    margin-right: 5px;
+    background: #f5f5f5;
+    border: 1px solid #007bff;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: all 0.3s;
+    display: inline-block;
+    color: #333; /* Черный цвет текста */
+}
+
+/* Уменьшаем правый отступ для последней кнопки */
+.btn:last-child {
+    margin-right: 0;
+}
+
+/* Стили для кнопки суперспособности */
+#superBtn {
+    background: #27ae60; /* Зеленый цвет */
+    color: white;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 5px;
+    font-size: 18px;
+    cursor: pointer;
+    margin: 0px auto;
+    display: block;
+    transition: background 0.3s;
+}
+
+
+#superBtn:disabled {
+    background: #95a5a6;
+    cursor: not-allowed;
+}
+
+/* Контейнер для ответов - выравниваем по центру */
+#options {
+    text-align: center;
+    margin: 20px 0;
+}
+`;
+
+document.head.appendChild(style);
+
+const allQuestions = [
+  { text: "Какая особенность северного неба считается удивительным природным явлением?", options: ["Полярная звезда", "Северное сияние", "Грозовые облака"], answer: 1 },
+  { text: "Какие следы чаще всего встречаются на снегу в северной тайге, по наблюдениям мишки Феди и его друзей?", options: ["Следы медведя", "Следы зайца", "Следы человека"], answer: 1 },
+  { text: "Какие природные опасности северного края упоминаются в рассказе о медвежонке Феди?", options: ["Землетрясения", "Снежные заносы и метели", "Наводнения"], answer: 1 },
+  { text: "Какие растения первыми появляются после зимы в северной тайге?", options: ["Мхи и лишайники", "Берёзы", "Полевые цветы"], answer: 0 },
+
+  { text: "Какие животные считаются типичными обитателями северной тайги?", options: ["Верблюды и шакалы", "Медведи и лоси", "Кенгуру и коалы"], answer: 1 },
+  { text: "Какие виды транспорта традиционно использовались в северных районах?", options: ["Оленьи упряжки и лодки", "Поезда и метро", "Велосипеды и скейтборды"], answer: 0 },
+  { text: "Какие особенности климата делают жизнь на Севере особенно трудной?", options: ["Жаркое лето и засухи", "Мягкая зима и дождливая весна", "Долгая зима и короткое лето"], answer: 2 },
+  { text: "Какие природные ресурсы добываются в северных регионах?", options: ["Нефть, газ и рыба", "Хлопок и табак", "Сахар и кофе"], answer: 0 },
+  { text: "Какие традиционные занятия были важны для жителей Севера?", options: ["Рыболовство и охота", "Выращивание винограда", "Производство шелка"], answer: 0 },
+  { text: "Какие птицы чаще всего встречаются в северных лесах?", options: ["Попугаи и фламинго", "Глухари и совы", "Павлины и страусы"], answer: 1 },
+  { text: "Какие морские пути играют важную роль в жизни северных регионов?", options: ["Северный морской путь", "Средиземноморский канал", "Тихоокеанский маршрут"], answer: 0 },
+
+
+  { text: "В каком городе молодой царь Петр Алексеевич начал строительство морских судов?", options: ["Москва", "Архангельск", "Санкт-Петербург"], answer: 1 },
+  { text: "Как назывался первый корабль коммерческого флота, спущенный на воду в Архангельске?", options: ["Святой Петр", "Святой Павел", "Святой Николай"], answer: 1 },
+  { text: "В каком году была основана первая государственная судостроительная верфь в России?", options: ["1690", "1693", "1700"], answer: 1 },
+  { text: "Как назывался командующий Черноморским флотом и первооткрыватель Антарктиды, связанный с переводом 12-го флотского полуэкипажа в Архангельск?", options: ["Ушаков", "Чичагов", "Лазарев"], answer: 2 },
+  { text: "Где находилась главная база Северного Флота в период с 1935 по 1947 гг.?", options: ["Мурманск", "Архангельск", "Полярное"], answer: 2 },
+  { text: "Какое событие произошло 21 сентября /4 октября по новому стилю/ 1916г.?", options: ["Открытие Александровска-на-Мурмане", "Закладка города Романова-на-Мурмане", "Первый полет над Ледовитым океаном"], answer: 1 },
+  { text: "Кто совершил первые полеты над Ледовитым океаном?", options: ["Колчак", "Нагурский", "Литке"], answer: 1 },
+  { text: "Какой ледокол в советское время был переименован в \"Красин\"?", options: ["Минин", "Канада", "Святогор"], answer: 2 },
+  { text: "Какой город был основан в 1584 г. по указу Ивана Грозного?", options: ["Мурманск", "Архангельск", "Александровск-на-Мурмане"], answer: 1 },
+
+  { text: "Какой салют на \"Авроре\" при прибытии в Берген?", options: ["10 выстрелов", "21 выстрел", "30 выстрелов"], answer: 1 },
+  { text: "Какой город, помимо Бергена, посетили 'Аврора' и 'Комсомолец' в Норвегии?", options: ["Архангельск", "Мурманск", "Тронхейм"], answer: 2 },
+  { text: "Чем закончилось первое загран. плавание 'Авроры' и 'Комсомольца'?", options: ["Прибытием в Архангельск", "Бросанием якоря в Кронштадте", "Посещением Швеции"], answer: 1 },
+  { text: "В каких морях выдержал первое испытание 'Океан'?", options: ["Из Балтийского моря в Порт-Артур и обратно", "Из Белого моря в Владивосток и обратно", "Из Черного моря в Средиземное море и обратно"], answer: 0 },
+  { text: "Чьи фото на стенде, пришедших на флот по призыву комсомола?", options: ["североморцев", "черноморцев", "балтийцев"], answer: 0 },
+  { text: "Какую надпись содержало знамя, врученное комсомолом флоту?", options: ["Флоту - слава!", "Орлам революции - морякам Красного Военного Флота Республики!", "Защитим страну!"], answer: 1 },
+
+  { text: "Какое судно в 1924 совершило переход из Архангельска во Владивосток южным путем?", options: ["'Воровский'", "'Персей'", "'Сибиряков'"], answer: 0 },
+  { text: "В каком году был подписан декрет о создании плавучего морского научного института?", options: ["1920", "1921", "1922"], answer: 1 },
+  { text: "Как называлось специальное судно, выделенное для плавучего морского научного института?", options: ["'Воровский'", "'Персей'", "'Сибиряков'"], answer: 1 },
+  { text: "Сколько плаваний совершил 'Персей' за свою историю?", options: ["54", "68", "84"], answer: 2 },
+  { text: "Какой ледокол в 1932 году прошел Северный морской путь за одну летнюю навигацию?", options: ["'Ф. Литке'", "'Г. Седов'", "'А. Сибиряков'"], answer: 2 },
+  { text: "Кто руководил экспедицией на ледоколе 'А. Сибиряков'?", options: ["Николаев", "Шмидт", "Воронин"], answer: 1 },
+  { text: "В каком году правительство приняло постановление об организации Главного управления Северного морского пути?", options: ["1932", "1934", "1936"], answer: 0 },
+  { text: "Какой ледокол совершил переход из Владивостока в Мурманск в 1934 году?", options: ["'Ф. Литке'", "'Ленин'", "'Ермак'"], answer: 0 },
+  { text: "Какой пароход неледокольного типа предпринял попытку пройти Северным морским путем в 1933 году?", options: ["'Вайгач'", "'Таймыр'", "'Челюскин'"], answer: 2 },
+  { text: "Кто возглавил экспедицию на пароходе 'Челюскин'?", options: ["Воронин", "Шмидт", "Николаев"], answer: 1 },
+  { text: "Сколько летчиков удостоены звания Героя Советского Союза за спасение челюскинцев?", options: ["5", "7", "9"], answer: 1 },
+  { text: "Какие эсминцы совершили первый переход по Северному морскому пути в 1936 году?", options: ["'Войков' и 'Сталин'", "'Грозный' и 'Властный'", "'Разумный' и 'Смелый'"], answer: 0 },
+  { text: "Кто командовал эсминцем 'Войков' при переходе по Севморпути?", options: ["Обухов", "Сухоруков", "Быстров"], answer: 1 },
+  { text: "Какая подлодка прошла по Севморпути в 1940 году?", options: ["'Щ-421'", "'Щ-422'", "'Щ-423'"], answer: 2 },
+  { text: "Кто командовал 'Щ-423' во время ледового похода?", options: ["Дрозд", "Зайдулин", "Головко"], answer: 1 },
+  { text: "Сколько дней длился дрейф ледокола 'Седов'?", options: ["542", "673", "812"], answer: 2 },
+  { text: "Сколько членов экипажа 'Седова' получили звание Героя Советского Союза?", options: ["10", "15", "20"], answer: 1 },
+  { text: "Кто командовал экипажем 'Г. Седова' во время дрейфа?", options: ["Шведе", "Бадигин", "Сендик"], answer: 1 },
+  { text: "Какой орден получил ледокольный пароход 'Г. Седов'?", options: ["Орден Трудового Красного знамени", "Орден Красной Звезды", "Орден Ленина"], answer: 2 },
+
+  { text: "Под каким лозунгом жили мурманчане в войну?", options: ["Всё для победы", "Всё для фронта", "Всё для Победы, всё для фронта!"], answer: 2 },
+  { text: "Где остановили немцев осенью 41-го?", options: ["Западная Лица", "Долина Славы", "Титовка"], answer: 1 },
+  { text: "Кто командовал 19-м горно-стрелковым корпусом немцев?", options: ["Дитль", "Гудериан", "Манштейн"], answer: 0 },
+  { text: "Что потопила 221-я батарея 22 июня 1941?", options: ["Эсминец", "Тральщик", "Подлодку"], answer: 1 },
+  { text: "Командир 221-й батареи?", options: ["Стебенев", "Космачев", "Сафонов"], answer: 1 },
+  { text: "Кто сбил первый вражеский самолет?", options: ["Сафонов", "Стебенев", "Космачев"], answer: 1 },
+  { text: "Первая награда Сафонова?", options: ["Герой Советского Союза", "Кр.Знамя", "Орден Ленина"], answer: 1 },
+  { text: "Кто первым получил Героя на СФ?", options: ["Кисляков", "Торцев", "Сивко"], answer: 0 },
+  { text: "Кто пожертвовал собой, взорвав гранатой себя и врагов?", options: ["Сивко", "Торцев", "Кисляков"], answer: 0 },
+  { text: "Что выбили с высоты 'Важная'?", options: ["Пулеметчиков", "Снайперов", "Гитлеровцев"], answer: 2 },
+  { text: "Кто командовал отрядом морпехов на реке Большая Западная Лица?", options: ["Торцев", "Ермоленко", "Старовойтов"], answer: 1 },
+  { text: "Каким орденом наградили Ермоленко в 1944?", options: ["Красного Знамени", "А.Невского", "Красной Звезды"], answer: 1 },
+
+  { text: "Где в 1942 открыли школу юнг ВМФ?", options: ["Мурманск", "Архангельск", "Соловки"], answer: 2 },
+  { text: "Какая специальность была у Вани Макарова?", options: ["Радист", "Моторист", "Рулевой"], answer: 1 },
+  { text: "На какой подлодке служил Дима Гомлин?", options: ["Щ-402", "Щ-422", "Щ-423"], answer: 1 },
+  { text: "Кто привёз Гомлина на Север?", options: ["Видяев", "Колышкин", "Никитин"], answer: 1 },
+  { text: "На каком эсминце ходил в походы Денисов?", options: ["'Гремящий'", "'Куйбышев'", "'Урицкий'"], answer: 1 },
+  { text: "Что сделал Ковалёв в моторном отделении?", options: ["Устранил пробоину", "Закрыл пробоину грудью", "Починил мотор"], answer: 1 },
+  { text: "Какой орден получил Ковалев?", options: ["Кр.Звезды", "Отеч.Войны 1 ст.", "Нахимова"], answer: 1 },
+  { text: "Кто написал поэму 'Песня о юнге'?", options: ["Букин", "Колышкин", "Ковалёв"], answer: 0 },
+
+  { text: "Какая лодка первой открыла боевой счёт СФ в 1943 году?", options: ["Л-20", "Щ-403", "С-55"], answer: 0 },
+  { text: "Кто командовал Л-20 при атаке у мыса Слетнес?", options: ["В.Ф.Тамман", "Е.Н.Алексеев", "А.В.Трипольский"], answer: 0 },
+  { text: "Какую лодку назвали «Ярославский комсомолец»?", options: ["М-104", "М-106", "М-107"], answer: 0 },
+  { text: "Какая лодка была построена на средства вдов североморцев?", options: ["М-200", "М-105", "С-54"], answer: 0 },
+
+  { text: "Какая советская подводная лодка под командованием капитана К.М.Шуйского успешно атаковала немецкий транспорт 'Гюнтер' в 1943 году?", options: ["Щ-403", "С-55", "Л-20"], answer: 0 },
+  { text: "Какой командир подводной лодки стал одним из самых результативных в кампании 1943 года, потопив сразу несколько немецких судов?", options: ["К.М.Шуйский", "Г.Ф.Макаренков", "Д.К.Братишко"], answer: 2 },
+  { text: "Какая подводная лодка, действовавшая в Баренцевом море, получила имя 'Ярославский комсомолец' в честь поддержки молодёжи?", options: ["М-104", "М-106", "М-107"], answer: 0 },
+  { text: "Какой тип оружия использовался советскими подводными лодками для потопления немецких транспортов в 1943 году?", options: ["Артиллерия", "Торпеды", "Мины"], answer: 1 },
+
+  { text: "Какой город стал центром культурной жизни Севера в годы Великой Отечественной войны?", options: ["Архангельск", "Мурманск", "Северодвинск"], answer: 1 },
+  { text: "Какая форма культурной поддержки использовалась для поднятия боевого духа моряков?", options: ["Киносеансы", "Фронтовые концерты", "Выставки живописи"], answer: 1 },
+  { text: "Какие учреждения организовывали выступления артистов на флоте?", options: ["Дом культуры", "Военные ансамбли", "Театры"], answer: 2 },
+  { text: "Какая тема чаще всего звучала в песнях, исполняемых для моряков?", options: ["Любовь", "Победа", "Природа"], answer: 1 },
+  { text: "Какие виды искусства активно использовались для агитации и поддержки бойцов?", options: ["Живопись и скульптура", "Музыка и театр", "Архитектура и дизайн"], answer: 1 },
+  { text: "Как назывались передвижные группы артистов, выступавшие на кораблях и базах?", options: ["Фронтовые бригады", "Морские капеллы", "Агитбригады"], answer: 2 }
+  
+];
+let player, bot, playerPos = 0, botPos = 0, superUsed = false;
+let questions = [];
+let currentQuestion = 0;
+
+function selectCharacter(name) {
+  player = characters.find(c => c.name === name);
+  const botChoices = characters.filter(c => c.name !== name);
+  bot = botChoices[Math.floor(Math.random() * botChoices.length)];
+  questions = shuffle([...allQuestions]).slice(0, 10);
+  playerPos = 0;
+  botPos = 0;
+  superUsed = false;
+  currentQuestion = 0;
+  document.getElementById('character-select').style.display = 'none';
+  document.getElementById('game-area').style.display = '';
+  document.getElementById('superBtn').disabled = false;
+  // Описание способности
+  let desc = '';
+  if (player.name === 'Федя') desc = 'Способность: Интуиция — переместиться на 1 вопрос вперёд.';
+  if (player.name === 'Kaя') desc = 'Способность: Полёт — переместиться на 2 вопроса вперёд.';
+  if (player.name === 'Кот') desc = 'Способность: Ловкость — переместиться на 1 вопрос вперёд, соперник остаётся на месте.';
+  document.getElementById('ability-desc').textContent = desc;
+  renderTrack();
+  renderQuestion();
+}
+
+function shuffle(arr) {
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+}
+
+function getCharCircleClass(name) {
+  if (name === 'Федя') return 'fedya-circle';
+  if (name === 'Кот') return 'kot-circle';
+  if (name === 'Kaя') return 'chayka-circle';
+  return '';
+}
+
+
+function getCharIcon(name) {
+  // Путь к папке с иконками.
+  // Поскольку index.html и script.js находятся на одном уровне с папкой img,
+  // мы обращаемся к ней напрямую по имени.
+  const iconFolderPath = 'img/';
+
+if (name === 'Федя') return `<img src="img/icon_fedya.png" alt="Иконка Феди" width="80" height="80">`;
+  if (name === 'Кот') return `<img src="img/icon_kot.png" alt="Иконка Кота" width="80" height="80">`;
+  if (name === 'Kaя') return `<img src="img/icon_seagull.png" alt="Иконка Чайки" width="80" height="80">`;
+
+  return '';
+}
+
+function renderTrack() {
+  const trackDiv = document.getElementById('track');
+  trackDiv.innerHTML = '';
+  if (window.innerWidth <= 600) {
+    // Мобильная версия: одна вертикальная линия, точки слева и справа
+    const line = document.createElement('div');
+    line.className = 'line-vert';
+    trackDiv.appendChild(line);
+    for (let i = 0; i < 10; i++) {
+      // точка игрока слева
+      if (i === playerPos) {
+        const dot = document.createElement('div');
+        dot.className = 'circle player-dot ' + getCharCircleClass(player.name);
+        dot.style.top = (i * 36) + 'px';
+        dot.textContent = getCharIcon(player.name);
+        trackDiv.appendChild(dot);
+      }
+      // точка бота справа
+      if (i === botPos) {
+        const dot = document.createElement('div');
+        dot.className = 'circle bot-dot ' + getCharCircleClass(bot.name);
+        dot.style.top = (i * 36) + 'px';
+        dot.textContent = getCharIcon(bot.name);
+        trackDiv.appendChild(dot);
+      }
+    }
+  } else {
+    // Десктоп: горизонтальная дорожка с кругами и линиями, игрок сверху, бот снизу
+    for (let i = 0; i < 10; i++) {
+      const circle = document.createElement('div');
+      circle.className = 'circle';
+      // Круг игрока сверху
+      if (i === playerPos) {
+        const playerAbove = document.createElement('div');
+        playerAbove.className = 'player-above ' + getCharCircleClass(player.name);
+        playerAbove.innerHTML = getCharIcon(player.name);
+        playerAbove.style.left = '50%';
+        playerAbove.style.transform = 'translate(-50%, -60%)';
+        playerAbove.style.zIndex = '3';
+        circle.appendChild(playerAbove);
+      }
+      if (i === botPos) {
+        const botBelow = document.createElement('div');
+        botBelow.className = 'bot-below ' + getCharCircleClass(bot.name);
+        botBelow.innerHTML = getCharIcon(bot.name);
+        botBelow.style.left = '50%';
+        botBelow.style.transform = 'translate(-50%, 60%)';
+        botBelow.style.zIndex = '3';
+        circle.appendChild(botBelow);
+      }
+      // Показываем только номер круга, без лишнего текста
+      circle.innerHTML += `<span style='position:relative;z-index:1;'>${i + 1}</span>`;
+      trackDiv.appendChild(circle);
+      if (i < 9) {
+        const line = document.createElement('div');
+        line.style.width = '30px';
+        line.style.height = '4px';
+        line.style.background = '#bbb';
+        line.style.margin = '0 2px';
+        trackDiv.appendChild(line);
+      }
+    }
+  }
+}
+
+function renderQuestion() {
+  if (playerPos >= 10 || botPos >= 10 || currentQuestion >= questions.length) {
+    endGame();
+    return;
+  }
+  const q = questions[currentQuestion];
+  // Для мобильных — показываем модальное окно
+  if (window.innerWidth <= 600) {
+    document.getElementById('question-modal').style.display = 'flex';
+    document.getElementById('modal-question').textContent = q.text;
+    const modalOptions = document.getElementById('modal-options');
+    modalOptions.innerHTML = '';
+    q.options.forEach((opt, idx) => {
+      const btn = document.createElement('button');
+      btn.textContent = opt;
+      btn.className = 'btn';
+      btn.onclick = () => { document.getElementById('question-modal').style.display = 'none'; answer(idx); };
+      modalOptions.appendChild(btn);
+    });
+  } else {
+    document.getElementById('question-modal').style.display = 'none';
+    document.getElementById('question-text').textContent = `${q.text}`;
+    const optionsDiv = document.getElementById('options');
+    optionsDiv.innerHTML = '';
+    q.options.forEach((opt, idx) => {
+      const btn = document.createElement('button');
+      btn.textContent = opt;
+      btn.className = 'btn';
+      btn.onclick = () => answer(idx);
+      optionsDiv.appendChild(btn);
+    });
+  }
+  document.getElementById('superBtn').disabled = superUsed;
+  renderTrack();
+  renderStatus();
+}
+
+function answer(idx) {
+  const q = questions[currentQuestion];
+  if (idx === q.answer) playerPos++;
+  // Ход бота
+  if (Math.random() < bot.chance) botPos++;
+  currentQuestion++;
+  // Если вопросы закончились, перемешиваем и начинаем заново
+  if (currentQuestion >= questions.length) {
+    questions = shuffle([...allQuestions]);
+    currentQuestion = 0;
+  }
+  renderQuestion();
+}
+
+function useSuperpower() {
+  if (superUsed) return;
+  superUsed = true;
+  let move = 1;
+  let botMove = true;
+  if (player.name === 'Федя') {
+    move = 1; // Интуиция
+  } else if (player.name === 'Kaя') {
+    move = 2; // Полёт
+  } else if (player.name === 'Кот') {
+    move = 1; // Ловкость
+    botMove = false; // Бот остаётся на месте
+  }
+  playerPos += move;
+  if (playerPos > 10) playerPos = 10;
+  // Бот ходит, кроме способности Кота
+  if (botMove) {
+    if (Math.random() < bot.chance) botPos++;
+  }
+  // Если способность Кота, бот 100% остаётся на месте
+  currentQuestion++;
+  if (currentQuestion >= questions.length) {
+    questions = shuffle([...allQuestions]);
+    currentQuestion = 0;
+  }
+  renderQuestion();
+}
+
+function renderStatus() {
+  document.getElementById('status').textContent = `Вы (${player.name}): ${playerPos}/10 | Соперник (${bot.name}): ${botPos}/10`;
+}
+
+function endGame() {
+  let msg = '';
+  if (playerPos >= 10 && botPos >= 10) msg = 'Ничья!';
+  else if (playerPos >= 10) msg = 'Вы победили!';
+  else if (botPos >= 10) msg = `Победил соперник (${bot.name})!`;
+  else msg = 'Игра окончена.';
+  document.getElementById('question-text').textContent = msg;
+  document.getElementById('options').innerHTML = '';
+  document.getElementById('superBtn').disabled = true;
+  renderTrack();
+  renderStatus();
+}
